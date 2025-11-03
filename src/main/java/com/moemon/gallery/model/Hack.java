@@ -30,6 +30,9 @@ public class Hack {
     @Column(name = "canvas_size")
     private Integer canvasSize;
 
+    @Column(name = "icon_path")
+    private String iconPath;
+
     public Hack() {
     }
 
@@ -85,6 +88,14 @@ public class Hack {
 
     public void setCanvasSize(Integer canvasSize) {
         this.canvasSize = canvasSize;
+    }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
     }
 
     public void addSpriteCopy(SpriteCopy spriteCopy){
