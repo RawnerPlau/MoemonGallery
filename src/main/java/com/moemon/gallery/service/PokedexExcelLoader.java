@@ -34,9 +34,7 @@ public class PokedexExcelLoader {
                     int pokedexNo = (int) row.getCell(0).getNumericCellValue();
                     String name = row.getCell(1).getStringCellValue();
 
-                    Pokemon pokemon = new Pokemon();
-                    pokemon.setPokedexNo(pokedexNo);
-                    pokemon.setName(name);
+                    Pokemon pokemon = new Pokemon(pokedexNo, name);
 
                     pokemonRepository.save(pokemon);
                 }

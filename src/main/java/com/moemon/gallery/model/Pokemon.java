@@ -47,6 +47,7 @@ public class Pokemon {
 
     public void setPokedexNo(Integer pokedexNo) {
         this.pokedexNo = pokedexNo;
+        this.generation = Generation.fromPokedexNumber(pokedexNo);
     }
 
     public String getName() {
