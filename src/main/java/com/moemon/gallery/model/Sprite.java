@@ -36,9 +36,9 @@ public class Sprite {
     public Sprite() {
     }
 
-    public Sprite(Pokemon pokemon, FormType formType, boolean isShiny) {
+    public Sprite(Pokemon pokemon, Form form, boolean isShiny) {
         this.pokemon = pokemon;
-        this.formType = formType;
+        this.form = form;
         this.isShiny = isShiny;
     }
 
@@ -58,12 +58,12 @@ public class Sprite {
         this.pokemon = pokemon;
     }
 
-    public FormType getForm() {
-        return formType;
+    public Form getForm() {
+        return form;
     }
 
-    public void setForm(FormType formType) {
-        this.formType = formType;
+    public void setForm(Form form) {
+        this.form = form;
     }
 
     public String getFileName() {
