@@ -21,12 +21,19 @@ public class PokemonService {
         return pokemonRepository.findAll();
     }
 
-    public Pokemon getPokemonById(Long id) {
-        return pokemonRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pokemon not found"));
+    public Pokemon getPokemonById(String identifier) {
+        try {
+            // Try parsing as a number first (ID)
+            Long id = Long.parseLong(identifier);
+            return pokemonRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Pokemon not found with ID: " + id));
+        } catch (NumberFormatException e) {
+            // Not a number → treat as name
+            return pokemonRepository.findByNameIgnoreCase(identifier)
+                    .orElseThrow(() -> new RuntimeException("Pokemon not found with name: " + identifier));
+        }
     }
 
-    public void registerSprite()
     @Transactional
     public Pokemon createPokemon(Pokemon pokemon) {
         // Business validation example
