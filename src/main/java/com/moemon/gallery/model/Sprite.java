@@ -17,9 +17,15 @@ public class Sprite {
     @JoinColumn(name = "pokemon_id", nullable = false)
     private Pokemon pokemon;
 
-    @OneToOne(mappedBy = "sprite", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Form form;
+    @Column(name = "form_name")
+    private String formName;
+
+    @Column(name = "form_type")
+    @Enumerated(EnumType.STRING)
+    private FormType type;
+
+    @Column(name = "is_EXForm")
+    private boolean isEXForm;
 
     @Column(name = "file_name")
     private String fileName;
@@ -36,9 +42,8 @@ public class Sprite {
     public Sprite() {
     }
 
-    public Sprite(Pokemon pokemon, Form form, boolean isShiny) {
+    public Sprite(Pokemon pokemon, boolean isShiny) {
         this.pokemon = pokemon;
-        this.form = form;
         this.isShiny = isShiny;
     }
 
@@ -58,12 +63,28 @@ public class Sprite {
         this.pokemon = pokemon;
     }
 
-    public Form getForm() {
-        return form;
+    public String getFormName() {
+        return formName;
     }
 
-    public void setForm(Form form) {
-        this.form = form;
+    public void setFormName(String formName) {
+        this.formName = formName;
+    }
+
+    public FormType getType() {
+        return type;
+    }
+
+    public void setType(FormType type) {
+        this.type = type;
+    }
+
+    public boolean isEXForm() {
+        return isEXForm;
+    }
+
+    public void setEXForm(boolean EXForm) {
+        isEXForm = EXForm;
     }
 
     public String getFileName() {
