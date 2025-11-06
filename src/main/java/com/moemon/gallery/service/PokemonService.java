@@ -26,6 +26,7 @@ public class PokemonService {
                 .orElseThrow(() -> new RuntimeException("Pokemon not found"));
     }
 
+    public void registerSprite()
     @Transactional
     public Pokemon createPokemon(Pokemon pokemon) {
         // Business validation example
