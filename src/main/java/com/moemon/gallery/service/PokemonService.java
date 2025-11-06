@@ -29,7 +29,7 @@ public class PokemonService {
                 .toList();
     }
 
-    public Pokemon getPokemonById(String identifier) {
+    public Pokemon findPokemonByIdOrName (String identifier) {
         try {
             // Try parsing as a number first (ID)
             Long id = Long.parseLong(identifier);

@@ -22,7 +22,7 @@ public class Sprite {
 
     @Column(name = "form_type")
     @Enumerated(EnumType.STRING)
-    private FormType type;
+    private FormType formType;
 
     @Column(name = "is_EXForm")
     private boolean isEXForm;
@@ -42,8 +42,11 @@ public class Sprite {
     public Sprite() {
     }
 
-    public Sprite(Pokemon pokemon, boolean isShiny) {
+    public Sprite(Pokemon pokemon, String formName, FormType formType, boolean isEXForm, boolean isShiny) {
         this.pokemon = pokemon;
+        this.formName = formName;
+        this.formType = formType;
+        this.isEXForm = isEXForm;
         this.isShiny = isShiny;
     }
 
@@ -71,12 +74,12 @@ public class Sprite {
         this.formName = formName;
     }
 
-    public FormType getType() {
-        return type;
+    public FormType getFormType() {
+        return formType;
     }
 
-    public void setType(FormType type) {
-        this.type = type;
+    public void setFormType(FormType formType) {
+        this.formType = formType;
     }
 
     public boolean isEXForm() {
