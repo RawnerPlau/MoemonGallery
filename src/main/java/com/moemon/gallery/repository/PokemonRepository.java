@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
     List<Pokemon> findByPokedexNoBetween(int start, int end);
 
+    List<Pokemon> findByNameContainingIgnoreCase(String name);
+
     Optional<Pokemon> findByNameIgnoreCase(String name);
 
     boolean existsByName(String name);

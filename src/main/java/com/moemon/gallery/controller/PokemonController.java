@@ -1,12 +1,10 @@
 package com.moemon.gallery.controller;
 
+import com.moemon.gallery.dto.PokemonDTO;
 import com.moemon.gallery.model.Pokemon;
 import com.moemon.gallery.service.PokemonService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,6 @@ public class PokemonController {
 
     private final PokemonService pokemonService;
 
-    // ✅ Constructor injection (best practice)
     public PokemonController(PokemonService pokemonService) {
         this.pokemonService = pokemonService;
     }
@@ -26,6 +23,10 @@ public class PokemonController {
         return pokemonService.getAllPokemon();
     }
 
+    @GetMapping("/search")
+    public List<PokemonDTO> searchByName (@RequestParam String name){
+        return pokemonService.searchByName(name);
+    }
 
     @GetMapping("/{identifier}")
     public ResponseEntity<Pokemon> getPokemon(@PathVariable String identifier) {

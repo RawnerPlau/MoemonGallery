@@ -1,5 +1,6 @@
 package com.moemon.gallery.service;
 
+import com.moemon.gallery.dto.PokemonDTO;
 import com.moemon.gallery.model.Pokemon;
 import com.moemon.gallery.repository.PokemonRepository;
 import jakarta.transaction.Transactional;
@@ -19,6 +20,13 @@ public class PokemonService {
     // 🔍 Business logic methods
     public List<Pokemon> getAllPokemon() {
         return pokemonRepository.findAll();
+    }
+
+    public List<PokemonDTO> searchByName(String name) {
+        return pokemonRepository.findByNameContainingIgnoreCase(name)
+                .stream()
+                .map(p -> new PokemonDTO(p.getPokedexNo(), p.getName()))
+                .toList();
     }
 
     public Pokemon getPokemonById(String identifier) {
