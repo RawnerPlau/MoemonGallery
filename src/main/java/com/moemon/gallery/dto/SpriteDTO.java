@@ -1,8 +1,6 @@
 package com.moemon.gallery.dto;
 
 import com.moemon.gallery.model.FormType;
-import lombok.Builder;
-import lombok.Data;
 
 public class SpriteDTO {
     private Integer id;
