@@ -18,4 +18,17 @@ public class UserService {
         User user = new User(userDTO.getUsername(), userDTO.getName(), userDTO.getPassword());
         userRepository.save(user);
     }
+
+    public User findUserByName(String name){
+        return userRepository.findByNameIgnoreCase(name)
+                .orElseThrow(() -> new RuntimeException("User not found."));
+    }
+
+    public UserDTO toDTO(User user){
+        return new UserDTO(
+                user.getUsername(),
+                user.getName(),
+                user.getPassword()
+        );
+    }
 }
