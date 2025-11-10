@@ -24,4 +24,9 @@ public class HackController {
         User developer = userService.findUserByName(hackCreateDTO.getDeveloperName());
         return ResponseEntity.ok(hackService.addHack(hackCreateDTO, developer));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<HackDTO> getHack (@PathVariable Long id){
+        return ResponseEntity.ok(hackService.getHack(id));
+    }
 }

@@ -19,13 +19,7 @@ public class HackService {
     public HackDTO getHack(Long id){
         Hack hack = hackRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Hack is not found."));
-        return new HackDTO (
-                hack.getId(),
-                hack.getName(),
-                hack.getDescription(),
-                hack.getDeveloper().getName(),
-                hack.getCanvasSize()
-        );
+        return toHackDTO(hack);
     }
 
     public HackDTO addHack(HackCreateDTO hackCreateDTO, User developer){
@@ -36,12 +30,16 @@ public class HackService {
                 hackCreateDTO.getCanvasSize()
         );
         Hack savedHack = hackRepository.save(hack);
+        return toHackDTO(savedHack);
+    }
+
+    public HackDTO toHackDTO(Hack hack){
         return new HackDTO(
-                savedHack.getId(),
-                savedHack.getName(),
-                savedHack.getDescription(),
-                savedHack.getDeveloper().getName(),
-                savedHack.getCanvasSize()
+                hack.getId(),
+                hack.getName(),
+                hack.getDescription(),
+                hack.getDeveloper().getName(),
+                hack.getCanvasSize()
         );
     }
 }
