@@ -36,9 +36,10 @@ public class Hack {
     public Hack() {
     }
 
-    public Hack(String name, User developer, Integer canvasSize) {
+    public Hack(String name, User developer, String description, Integer canvasSize) {
         this.name = name;
         this.developer = developer;
+        this.description = description;
         this.canvasSize = canvasSize;
     }
 
@@ -106,5 +107,12 @@ public class Hack {
     public void removeSpriteCopy(SpriteCopy spriteCopy){
         spriteCopies.remove(spriteCopy);
         spriteCopy.setHack(null);
+    }
+
+    @PostPersist
+    private void onPersist() {
+        if (iconPath == null || iconPath.isEmpty()) {
+            this.iconPath = String.format("%04d_%s.jpg", this.id, this.name);
+        }
     }
 }
