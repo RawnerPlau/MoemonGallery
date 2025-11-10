@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/hack")
 public class HackController {
-    private HackService hackService;
-    private UserService userService;
+    private final HackService hackService;
+    private final UserService userService;
 
     public HackController (HackService hackService, UserService userService){
         this.hackService = hackService;
