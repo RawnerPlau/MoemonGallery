@@ -42,4 +42,9 @@ public class HackService {
                 hack.getCanvasSize()
         );
     }
+
+    public Hack findHackByName (String name){
+        return hackRepository.findByNameIgnoreCase(name)
+                .orElseThrow(() -> new RuntimeException("Hack unrecognized."));
+    }
 }
