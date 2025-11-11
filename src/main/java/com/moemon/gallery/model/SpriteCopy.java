@@ -1,5 +1,6 @@
 package com.moemon.gallery.model;
 
+import com.moemon.gallery.converter.BooleanToYesNoConverter;
 import com.moemon.user.model.Credit;
 import jakarta.persistence.*;
 
@@ -27,11 +28,18 @@ public class SpriteCopy {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(name = "is_priority")
+    @Convert(converter = BooleanToYesNoConverter.class)
+    private boolean isPriority;
+
     public SpriteCopy() {
     }
 
-    public SpriteCopy(Sprite sprite) {
+    public SpriteCopy(Sprite sprite, Hack hack, Status status, boolean isPriority) {
         this.sprite = sprite;
+        this.hack = hack;
+        this.status = status;
+        this.isPriority = isPriority;
     }
 
     public Integer getId() {
