@@ -3,7 +3,6 @@ package com.moemon.gallery.controller;
 import com.moemon.user.service.UserService;
 import com.moemon.user.model.UserDTO;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
