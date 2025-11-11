@@ -82,6 +82,14 @@ public class SpriteCopy {
         this.status = status;
     }
 
+    public boolean isPriority() {
+        return isPriority;
+    }
+
+    public void setPriority(boolean priority) {
+        isPriority = priority;
+    }
+
     public void removeHack(){
         hack.removeSpriteCopy(this);
     }

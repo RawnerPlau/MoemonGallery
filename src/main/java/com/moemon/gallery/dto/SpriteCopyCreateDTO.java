@@ -3,7 +3,6 @@ package com.moemon.gallery.dto;
 import com.moemon.gallery.model.Status;
 
 public class SpriteCopyCreateDTO {
-    private Integer spriteId;
     private String hack;
     private Status status;
     private boolean isPriority;
@@ -11,20 +10,12 @@ public class SpriteCopyCreateDTO {
     public SpriteCopyCreateDTO() {
     }
 
-    public SpriteCopyCreateDTO(Integer spriteId, String hack, Status status, boolean isPriority) {
-        this.spriteId = spriteId;
+    public SpriteCopyCreateDTO(String hack, Status status, boolean isPriority) {
         this.hack = hack;
         this.status = status;
         this.isPriority = isPriority;
     }
 
-    public Integer getSpriteId() {
-        return spriteId;
-    }
-
-    public void setSpriteId(Integer spriteId) {
-        this.spriteId = spriteId;
-    }
 
     public String getHack() {
         return hack;

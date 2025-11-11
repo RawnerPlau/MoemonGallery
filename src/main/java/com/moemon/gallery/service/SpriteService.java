@@ -18,18 +18,8 @@ public class SpriteService {
     }
 
     public SpriteDTO findSpriteById (Long id){
-        Sprite sprite = spriteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sprite is not found: " + id));
-        return new SpriteDTO(
-                sprite.getId(),
-                sprite.getPokemon().getPokedexNo(),
-                sprite.getPokemon().getName(),
-                sprite.getFormName(),
-                sprite.getFormType(),
-                sprite.isEXForm(),
-                sprite.isShiny(),
-                sprite.getFileName()
-        );
+        return toSpriteDTO(spriteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sprite is not found: " + id)));
     }
 
     public SpriteCreateDTO addSprite (Pokemon pokemon, SpriteCreateDTO spriteDTO){
@@ -46,6 +36,19 @@ public class SpriteService {
                 newSprite.getFormType(),
                 newSprite.isEXForm(),
                 newSprite.isShiny()
+        );
+    }
+
+    public SpriteDTO toSpriteDTO (Sprite sprite){
+        return new SpriteDTO(
+                sprite.getId(),
+                sprite.getPokemon().getPokedexNo(),
+                sprite.getPokemon().getName(),
+                sprite.getFormName(),
+                sprite.getFormType(),
+                sprite.isEXForm(),
+                sprite.isShiny(),
+                sprite.getFileName()
         );
     }
 }
