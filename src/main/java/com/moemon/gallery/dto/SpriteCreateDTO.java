@@ -1,7 +1,8 @@
 package com.moemon.gallery.dto;
 
-import com.moemon.gallery.model.CreditRole;
 import com.moemon.gallery.model.FormType;
+
+import java.util.Set;
 
 public class SpriteCreateDTO {
     private Integer id;
@@ -9,15 +10,15 @@ public class SpriteCreateDTO {
     private FormType formType;
     private boolean isEXForm;
     private boolean isShiny;
-    private CreditDTO credit;
+    private Set<CreditDTO> credits;
 
-    public SpriteCreateDTO(Integer id, String formName, FormType formType, boolean isEXForm, boolean isShiny, CreditDTO credit) {
+    public SpriteCreateDTO(Integer id, String formName, FormType formType, boolean isEXForm, boolean isShiny, Set<CreditDTO> credit) {
         this.id = id;
         this.formName = formName;
         this.formType = formType;
         this.isEXForm = isEXForm;
         this.isShiny = isShiny;
-        this.credit = credit;
+        this.credits = credit;
     }
 
     public Integer getId() {
@@ -60,12 +61,12 @@ public class SpriteCreateDTO {
         isShiny = shiny;
     }
 
-    public CreditDTO getCredit() {
-        return credit;
+    public Set<CreditDTO> getCredits() {
+        return credits;
     }
 
-    public void setCredit(CreditDTO credit) {
-        this.credit = credit;
+    public void setCredits(Set<CreditDTO> credits) {
+        this.credits = credits;
     }
 }
 

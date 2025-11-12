@@ -1,6 +1,9 @@
 package com.moemon.gallery.dto;
 
+import com.moemon.gallery.model.Credit;
 import com.moemon.gallery.model.FormType;
+
+import java.util.Set;
 
 public class SpriteDTO {
     private Integer id;
@@ -11,6 +14,7 @@ public class SpriteDTO {
     private boolean isEXForm;
     private boolean isShiny;
     private String fileName;
+    private Set<CreditDTO> credits;
 
     public SpriteDTO(Integer id,
                      Integer pokedexNo,
@@ -19,7 +23,8 @@ public class SpriteDTO {
                      FormType formType,
                      boolean isEXForm,
                      boolean isShiny,
-                     String fileName) {
+                     String fileName,
+                     Set<CreditDTO> credits) {
         this.id = id;
         this.pokedexNo = pokedexNo;
         this.pokemonName = pokemonName;
@@ -28,6 +33,7 @@ public class SpriteDTO {
         this.isEXForm = isEXForm;
         this.isShiny = isShiny;
         this.fileName = fileName;
+        this.credits = credits;
     }
 
     public Integer getId() {
@@ -92,5 +98,13 @@ public class SpriteDTO {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public Set<CreditDTO> getCredits() {
+        return credits;
+    }
+
+    public void setCredits(Set<CreditDTO> credits) {
+        this.credits = credits;
     }
 }

@@ -41,12 +41,13 @@ public class Sprite {
     public Sprite() {
     }
 
-    public Sprite(Pokemon pokemon, String formName, FormType formType, boolean isEXForm, boolean isShiny) {
+    public Sprite(Pokemon pokemon, String formName, FormType formType, boolean isEXForm, boolean isShiny, Set<Credit> credits) {
         this.pokemon = pokemon;
         this.formName = formName;
         this.formType = formType;
         this.isEXForm = isEXForm;
         this.isShiny = isShiny;
+        this.credits = credits;
     }
 
     public Integer getId() {
