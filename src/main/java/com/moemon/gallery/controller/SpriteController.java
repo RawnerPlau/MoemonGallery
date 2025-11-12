@@ -1,13 +1,12 @@
 package com.moemon.gallery.controller;
 
+import com.moemon.gallery.dto.CreditDTO;
 import com.moemon.gallery.dto.SpriteDTO;
-import com.moemon.gallery.model.Sprite;
 import com.moemon.gallery.service.SpriteService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/sprites")
@@ -21,6 +20,11 @@ public class SpriteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SpriteDTO> getSprite (@PathVariable Long id){
-        return ResponseEntity.ok(spriteService.findSpriteById(id));
+        return ResponseEntity.ok(spriteService.findSpriteDTOById(id));
+    }
+
+    @PostMapping("/{id}/credits")
+    public ResponseEntity<SpriteDTO> updateCredits(@PathVariable Long id, @RequestBody Set<CreditDTO> credits){
+        return ResponseEntity.ok(spriteService.updateCredits(id, credits));
     }
 }
