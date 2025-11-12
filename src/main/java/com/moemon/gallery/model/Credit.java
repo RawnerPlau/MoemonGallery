@@ -3,6 +3,8 @@ package com.moemon.gallery.model;
 import com.moemon.user.model.User;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "credits")
 public class Credit {
@@ -71,5 +73,24 @@ public class Credit {
 
     public void setRole(CreditRole role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals  (Object o){
+        if (this == o) return true; // same object
+        if (!(o instanceof Credit credit)) return false; // wrong type
+        boolean sameSprite = sprite != null && sprite.equals(credit.getSprite());
+        boolean sameDex = dexEntry != null && dexEntry.equals(credit.getDexEntry());
+
+        boolean sameParent = sameSprite || sameDex;
+
+        return sameParent &&
+                Objects.equals(user, credit.getUser()) &&
+                Objects.equals(role, credit.getRole());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, role, sprite != null ? sprite : dexEntry);
     }
 }
