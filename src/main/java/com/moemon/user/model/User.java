@@ -2,7 +2,7 @@ package com.moemon.user.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.moemon.gallery.dto.Credit;
+import com.moemon.gallery.model.Credit;
 import jakarta.persistence.*;
 
 @Entity

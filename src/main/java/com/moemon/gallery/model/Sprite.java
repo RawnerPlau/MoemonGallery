@@ -1,6 +1,5 @@
 package com.moemon.gallery.model;
 
-import com.moemon.gallery.dto.Credit;
 import jakarta.persistence.*;
 
 import java.util.HashSet;

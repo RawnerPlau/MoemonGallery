@@ -2,6 +2,7 @@ package com.moemon.gallery.controller;
 
 import com.moemon.gallery.dto.PokemonDTO;
 import com.moemon.gallery.dto.SpriteCreateDTO;
+import com.moemon.gallery.dto.SpriteDTO;
 import com.moemon.gallery.model.Pokemon;
 import com.moemon.gallery.service.PokemonService;
 import com.moemon.gallery.service.SpriteService;
@@ -32,8 +33,8 @@ public class PokemonController {
         return pokemonService.searchByName(name);
     }
 
-    @PostMapping("/{identifier}/new_sprite")
-    public ResponseEntity<SpriteCreateDTO> addSprite(
+    @PostMapping("/{identifier}")
+    public ResponseEntity<SpriteDTO> addSprite(
             @PathVariable String identifier,
             @RequestBody SpriteCreateDTO spriteDTO) {
         Pokemon pokemon = pokemonService.findPokemonByIdOrName(identifier);

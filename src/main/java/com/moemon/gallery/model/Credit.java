@@ -1,7 +1,5 @@
-package com.moemon.gallery.dto;
+package com.moemon.gallery.model;
 
-import com.moemon.gallery.model.DexEntry;
-import com.moemon.gallery.model.Sprite;
 import com.moemon.user.model.User;
 import jakarta.persistence.*;
 

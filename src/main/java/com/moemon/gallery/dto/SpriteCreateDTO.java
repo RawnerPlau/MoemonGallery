@@ -1,5 +1,6 @@
 package com.moemon.gallery.dto;
 
+import com.moemon.gallery.model.CreditRole;
 import com.moemon.gallery.model.FormType;
 
 public class SpriteCreateDTO {
@@ -8,13 +9,15 @@ public class SpriteCreateDTO {
     private FormType formType;
     private boolean isEXForm;
     private boolean isShiny;
+    private CreditDTO credit;
 
-    public SpriteCreateDTO(Integer id, String formName, FormType formType, boolean isEXForm, boolean isShiny) {
+    public SpriteCreateDTO(Integer id, String formName, FormType formType, boolean isEXForm, boolean isShiny, CreditDTO credit) {
         this.id = id;
         this.formName = formName;
         this.formType = formType;
         this.isEXForm = isEXForm;
         this.isShiny = isShiny;
+        this.credit = credit;
     }
 
     public Integer getId() {
@@ -55,6 +58,14 @@ public class SpriteCreateDTO {
 
     public void setShiny(boolean shiny) {
         isShiny = shiny;
+    }
+
+    public CreditDTO getCredit() {
+        return credit;
+    }
+
+    public void setCredit(CreditDTO credit) {
+        this.credit = credit;
     }
 }
 

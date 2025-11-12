@@ -1,4 +1,4 @@
-package com.moemon.gallery.dto;
+package com.moemon.gallery.model;
 
 public enum CreditRole {
     ARTIST,
