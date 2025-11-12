@@ -3,6 +3,7 @@ package com.moemon.gallery.service;
 import com.moemon.gallery.dto.CreditDTO;
 import com.moemon.gallery.dto.SpriteCreateDTO;
 import com.moemon.gallery.dto.SpriteDTO;
+import com.moemon.gallery.mapper.CreditMapper;
 import com.moemon.gallery.model.Credit;
 import com.moemon.gallery.model.Pokemon;
 import com.moemon.gallery.model.Sprite;
@@ -28,7 +29,7 @@ public class SpriteService {
 
     public Sprite findSpriteById(Long id){
         return spriteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sprite is not found: " + id));
+                .orElseThrow(() -> new RuntimeException("Sprite is not found by id: " + id));
     }
 
     public SpriteDTO findSpriteDTOById(Long id){
@@ -59,6 +60,11 @@ public class SpriteService {
         existingCredits.addAll(newCredits);
         spriteRepository.save(sprite);
         return new SpriteDTO(sprite);
+    }
+
+    public Set<CreditDTO> getSpriteCreditsDTO (Long id){
+        Sprite sprite = findSpriteById(id);
+        return CreditMapper.toDTOs(sprite.getCredits());
     }
 
     private Set<Credit> CreditDTOsToCredits(Set<CreditDTO> creditDTOS, Sprite sprite){

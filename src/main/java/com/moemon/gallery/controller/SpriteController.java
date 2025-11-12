@@ -27,4 +27,9 @@ public class SpriteController {
     public ResponseEntity<SpriteDTO> updateCredits(@PathVariable Long id, @RequestBody Set<CreditDTO> credits){
         return ResponseEntity.ok(spriteService.updateCredits(id, credits));
     }
+
+    @GetMapping("/{id}/credits")
+    public ResponseEntity<Set<CreditDTO>> getCredits (@PathVariable Long id){
+        return ResponseEntity.ok(spriteService.getSpriteCreditsDTO(id));
+    }
 }
