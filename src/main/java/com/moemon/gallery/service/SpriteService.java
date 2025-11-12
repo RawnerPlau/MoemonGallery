@@ -22,7 +22,7 @@ public class SpriteService {
                 .orElseThrow(() -> new RuntimeException("Sprite is not found: " + id)));
     }
 
-    public SpriteCreateDTO addSprite (Pokemon pokemon, SpriteCreateDTO spriteDTO){
+    public SpriteDTO addSprite (Pokemon pokemon, SpriteCreateDTO spriteDTO){
         Sprite sprite = new Sprite(
                 pokemon,
                 spriteDTO.getFormName(),
@@ -30,13 +30,7 @@ public class SpriteService {
                 spriteDTO.isEXForm(),
                 spriteDTO.isShiny());
         Sprite newSprite = spriteRepository.save(sprite);
-        return new SpriteCreateDTO(
-                newSprite.getId(),
-                newSprite.getFormName(),
-                newSprite.getFormType(),
-                newSprite.isEXForm(),
-                newSprite.isShiny()
-        );
+        return toSpriteDTO(newSprite);
     }
 
     public SpriteDTO toSpriteDTO (Sprite sprite){
