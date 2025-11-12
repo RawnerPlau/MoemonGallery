@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SpriteService {
@@ -25,49 +26,52 @@ public class SpriteService {
         this.userRepository = userRepository;
     }
 
-    public SpriteDTO findSpriteById (Long id){
-        return toSpriteDTO(spriteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sprite is not found: " + id)));
+    public Sprite findSpriteById(Long id){
+        return spriteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sprite is not found: " + id));
+    }
+
+    public SpriteDTO findSpriteDTOById(Long id){
+        return new SpriteDTO(findSpriteById(id));
     }
 
     public SpriteDTO addSprite (Pokemon pokemon, SpriteCreateDTO spriteDTO){
-        Set<Credit> credits = new HashSet<>();
-        for (CreditDTO creditDTO : spriteDTO.getCredits()){
-            String username = creditDTO.getName();
-            User user = userRepository.findByNameIgnoreCase(username)
-                    .orElseThrow(() -> new RuntimeException("User not found with the name: " + username));
-            Credit credit = new Credit(user, creditDTO.getCreditRole());
-            credits.add(credit);
-        }
-
         Sprite sprite = new Sprite(
                 pokemon,
                 spriteDTO.getFormName(),
                 spriteDTO.getFormType(),
                 spriteDTO.isEXForm(),
-                spriteDTO.isShiny(),
-                credits
+                spriteDTO.isShiny()
                 );
+        Set<Credit> credits = CreditDTOsToCredits(spriteDTO.getCredits(), sprite);
+        sprite.setCredits(credits);
         Sprite newSprite = spriteRepository.save(sprite);
-        return toSpriteDTO(newSprite);
+        return new SpriteDTO(newSprite);
     }
 
-    public SpriteDTO toSpriteDTO (Sprite sprite){
-        Set<CreditDTO> creditDTOS = new HashSet<>();
-        for (Credit credit : sprite.getCredits()){
-            CreditDTO creditDTO = new CreditDTO(credit.getUser().getName(), credit.getRole());
-            creditDTOS.add(creditDTO);
-        }
-        return new SpriteDTO(
-                sprite.getId(),
-                sprite.getPokemon().getPokedexNo(),
-                sprite.getPokemon().getName(),
-                sprite.getFormName(),
-                sprite.getFormType(),
-                sprite.isEXForm(),
-                sprite.isShiny(),
-                sprite.getFileName(),
-                creditDTOS
-        );
+    public SpriteDTO updateCredits (Long spriteId, Set<CreditDTO> creditDTOS){
+        Sprite sprite = spriteRepository.findById(spriteId)
+                .orElseThrow(() -> new RuntimeException("Sprite not found by Id: " + spriteId));
+        Set<Credit> existingCredits = sprite.getCredits();
+        Set<Credit> newCredits = CreditDTOsToCredits(creditDTOS, sprite);
+
+        existingCredits.removeIf(credit -> !newCredits.contains(credit));
+        existingCredits.addAll(newCredits);
+        spriteRepository.save(sprite);
+        return new SpriteDTO(sprite);
+    }
+
+    private Set<Credit> CreditDTOsToCredits(Set<CreditDTO> creditDTOS, Sprite sprite){
+        if (creditDTOS == null) return new HashSet<>();
+        return creditDTOS.stream()
+                .map(dto -> {
+                    Credit credit = new Credit();
+                    credit.setSprite(sprite);
+                    credit.setUser(userRepository.findByNameIgnoreCase(dto.getName())
+                            .orElseThrow(() -> new RuntimeException("User not found with the name: " + dto.getName())));
+                    credit.setRole(dto.getCreditRole());
+                    return credit;
+                })
+                .collect(Collectors.toSet());
     }
 }

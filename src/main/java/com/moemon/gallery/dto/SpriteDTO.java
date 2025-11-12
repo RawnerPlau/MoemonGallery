@@ -1,8 +1,11 @@
 package com.moemon.gallery.dto;
 
+import com.moemon.gallery.mapper.CreditMapper;
 import com.moemon.gallery.model.Credit;
 import com.moemon.gallery.model.FormType;
+import com.moemon.gallery.model.Sprite;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class SpriteDTO {
@@ -34,6 +37,18 @@ public class SpriteDTO {
         this.isShiny = isShiny;
         this.fileName = fileName;
         this.credits = credits;
+    }
+
+    public SpriteDTO (Sprite sprite){
+        this.id = sprite.getId();
+        this.pokedexNo = sprite.getPokemon().getPokedexNo();
+        this.pokemonName = sprite.getPokemon().getName();
+        this.formName = sprite.getFormName();
+        this.formType = sprite.getFormType();
+        this.isEXForm = sprite.isEXForm();
+        this.isShiny = sprite.isShiny();
+        this.fileName = sprite.getFileName();
+        this.credits = CreditMapper.toDTOs(sprite.getCredits());
     }
 
     public Integer getId() {
