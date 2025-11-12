@@ -1,4 +1,4 @@
-package com.moemon.gallery.controller;
+package com.moemon.user.controller;
 
 import com.moemon.user.service.UserService;
 import com.moemon.user.model.UserDTO;
