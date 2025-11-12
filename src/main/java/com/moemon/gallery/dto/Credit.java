@@ -1,7 +1,8 @@
-package com.moemon.user.model;
+package com.moemon.gallery.dto;
 
 import com.moemon.gallery.model.DexEntry;
 import com.moemon.gallery.model.Sprite;
+import com.moemon.user.model.User;
 import jakarta.persistence.*;
 
 @Entity

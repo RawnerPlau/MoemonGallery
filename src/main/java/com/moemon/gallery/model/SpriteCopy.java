@@ -1,10 +1,7 @@
 package com.moemon.gallery.model;
 
 import com.moemon.gallery.converter.BooleanToYesNoConverter;
-import com.moemon.user.model.Credit;
 import jakarta.persistence.*;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "sprite_copies")
