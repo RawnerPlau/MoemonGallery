@@ -1,7 +1,9 @@
 package com.moemon.user.service;
 
+import com.moemon.user.dto.UserDTO;
+import com.moemon.user.mapper.UserMapper;
 import com.moemon.user.model.User;
-import com.moemon.user.model.UserDTO;
+import com.moemon.user.dto.CreateUserDTO;
 import com.moemon.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(UserDTO userDTO){
-        User user = new User(userDTO.getUsername(), userDTO.getName(), userDTO.getPassword());
+    public void addUser(CreateUserDTO createUserDTO){
+        User user = new User(createUserDTO.getUsername(), createUserDTO.getName(), createUserDTO.getPassword());
         userRepository.save(user);
     }
 
@@ -24,8 +26,17 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found."));
     }
 
-    public UserDTO toDTO(User user){
-        return new UserDTO(
+    public User findUserById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public UserDTO findUserDTOById(Long id){
+        return UserMapper.toDTO(findUserById(id));
+    }
+
+    public CreateUserDTO toDTO(User user){
+        return new CreateUserDTO(
                 user.getUsername(),
                 user.getName(),
                 user.getPassword()

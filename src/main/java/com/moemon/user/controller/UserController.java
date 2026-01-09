@@ -1,7 +1,8 @@
 package com.moemon.user.controller;
 
+import com.moemon.user.dto.UserDTO;
 import com.moemon.user.service.UserService;
-import com.moemon.user.model.UserDTO;
+import com.moemon.user.dto.CreateUserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,13 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addUser(@RequestBody UserDTO user){
+    public ResponseEntity<Void> addUser(@RequestBody CreateUserDTO user){
         userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> addUser(@PathVariable Long id){
+        return ResponseEntity.ok(userService.findUserDTOById(id));
     }
 }
