@@ -1,14 +1,14 @@
-package com.moemon.user.model;
+package com.moemon.user.dto;
 
-public class UserDTO {
+public class CreateUserDTO {
     private  String username;
     private String name;
     private String password;
 
-    public UserDTO() {
+    public CreateUserDTO() {
     }
 
-    public UserDTO(String username, String name, String password) {
+    public CreateUserDTO(String username, String name, String password) {
         this.username = username;
         this.name = name;
         this.password = password;
